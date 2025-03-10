@@ -1,15 +1,22 @@
 import mongoose, { ObjectId, Schema } from "mongoose";
 
-type authenticationSchematype = {};
+type authenticationSchematype = {
+  email: string;
+  password: string;
+  phoneNumber: number;
+  role: string;
+  ttl: Date;
+  isVerified: boolean;
+};
 
 const authenticationSchema: Schema = new Schema(
   {
     email: { type: String, required: true },
     password: { type: String, required: true },
-    phoneNumber: { type: String, required: true },
+    phoneNumber: { type: Number, required: true },
     role: ["User", "Admin"],
-    ttl: { Date, required: true },
-    isVerified: { Boolean, requierd: true },
+    ttl: { type: Date, required: true },
+    isVerified: { type: Boolean, requierd: true },
   },
   { timestamps: true }
 );

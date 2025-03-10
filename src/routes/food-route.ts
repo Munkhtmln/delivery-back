@@ -3,13 +3,15 @@ import {
   createFood,
   deleteFood,
   getFood,
+  getFoods,
   updateFoodData,
-} from "../controller/food.controller";
+} from "../controller/food-controller";
 
 const foodRoute = express.Router();
 
 foodRoute.post("/", createFood);
-foodRoute.get("/", getFood);
+foodRoute.get("/:foodId", getFood);
+foodRoute.get("/", getFoods);
 foodRoute.put("/:foodId", updateFoodData);
 foodRoute.delete("/:foodId", deleteFood);
 

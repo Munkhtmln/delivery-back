@@ -36,7 +36,7 @@ export const uptadeDelete = async (req: Request, res: Response) => {
       uptadeData
     );
     res.status(201).json({
-      message: "succesfuly updated food-category",
+      message: "succesfuly deleted food-category",
       data: updateCategory,
     });
   } catch (error) {

@@ -4,11 +4,13 @@ import {
   deleteUser,
   getUsers,
   updateUser,
-} from "../controller/authentication.controller";
+} from "../controller/authentication-controller";
 
 const authenticationRoute = express.Router();
 
 authenticationRoute.post("/", createUser);
 authenticationRoute.get("/", getUsers);
-authenticationRoute.put("/", updateUser);
-authenticationRoute.delete("/", deleteUser);
+authenticationRoute.put("/:userId", updateUser);
+authenticationRoute.delete("/:userId", deleteUser);
+
+export default authenticationRoute;

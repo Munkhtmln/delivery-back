@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import authenticationModels from "../models/authentication.models";
+import authenticationModels from "../models/authentication-models";
 
 export const createUser = async (req: Request, res: Response) => {
   try {

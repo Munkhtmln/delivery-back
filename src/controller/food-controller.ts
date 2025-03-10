@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import foodModels from "../models/food.models";
+import foodModels from "../models/food-models";
 
 export const createFood = async (req: Request, res: Response) => {
   try {
@@ -11,10 +11,24 @@ export const createFood = async (req: Request, res: Response) => {
   }
 };
 export const getFood = async (req: Request, res: Response) => {
+  const { foodId } = req.params;
+  try {
+    const getFood = await foodModels.find({
+      _id: foodId,
+    });
+    res.status(200).json({
+      message: "succesfuly got food",
+      data: getFood,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "getting error", error });
+  }
+};
+export const getFoods = async (req: Request, res: Response) => {
   try {
     const getFood = await foodModels.find();
-    res.status(201).json({
-      message: "succesfuly got food",
+    res.status(200).json({
+      message: "succesfuly got foods",
       data: getFood,
     });
   } catch (error) {
