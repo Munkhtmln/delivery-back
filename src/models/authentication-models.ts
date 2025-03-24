@@ -4,9 +4,9 @@ type authenticationSchematype = {
   email: string;
   password: string;
   phoneNumber: number;
-  role: string;
-  ttl: Date;
-  isVerified: boolean;
+  role?: string;
+  ttl?: Date;
+  isVerified?: boolean;
 };
 
 const authenticationSchema: Schema = new Schema(

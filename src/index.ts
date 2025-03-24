@@ -13,7 +13,7 @@ configDotenv();
 connectedMongoDB();
 app.use(bodyParser.json());
 const port = process.env.PORT;
-
+app.use(cors());
 app.use("/food-category", categoryRoute);
 app.use("/foods", foodRoute);
 app.use("/Authentication", authenticationRoute);
