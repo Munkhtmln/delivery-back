@@ -21,6 +21,10 @@ app.use("/food", foodRoute);
 app.use("/food-category", foodCategoryRoute);
 app.use("/food-order", foodOrderRoute);
 app.use("/user", userRoute);
+app.get("/", (req, res) => {
+  console.log("hello this is get");
+  res.send("hello this is get");
+});
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

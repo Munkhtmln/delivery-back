@@ -16,6 +16,7 @@ exports.signIn = void 0;
 const user_model_1 = __importDefault(require("../../models/user.model"));
 const bcryptjs_1 = require("bcryptjs");
 const signIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("SignIn request received");
     try {
         const { email, password } = req.body;
         const user = yield user_model_1.default.findOne({ email });
@@ -31,6 +32,7 @@ const signIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(200).json({ message: "Sign in successful", user: user });
     }
     catch (error) {
+        console.log("Error in signIn:", error);
         res.status(500).json({ message: "Error in signIn", error });
     }
 });
