@@ -3,6 +3,7 @@ import userModel from "../../models/user.model";
 import { compareSync } from "bcryptjs";
 
 export const signIn = async (req: Request, res: Response): Promise<void> => {
+  console.log("SignIn request received");
   try {
     const { email, password } = req.body;
     const user = await userModel.findOne({ email });
@@ -17,6 +18,7 @@ export const signIn = async (req: Request, res: Response): Promise<void> => {
     }
     res.status(200).json({ message: "Sign in successful", user: user });
   } catch (error) {
+    console.log("Error in signIn:", error);
     res.status(500).json({ message: "Error in signIn", error });
   }
 };
