@@ -1,12 +1,9 @@
 import { Request, Response } from "express";
+import userModel from "../../models/user.model";
 import jwt from "jsonwebtoken";
-import sendEmail from "../util/send-email";
-import authenticationModels from "../models/authentication-models";
-import { configDotenv } from "dotenv";
-configDotenv();
+import { sendEmail } from "../../util/send_mail";
 const jwtSecret = process.env.JWT_SECRET;
-
-export const forgetPassword = async (req: Request, res: Response) => {
+export const resetPasswordRequest = async (req: Request, res: Response) => {
   try {
     const { email } = req.body;
     if (!email) {
@@ -14,16 +11,14 @@ export const forgetPassword = async (req: Request, res: Response) => {
       return;
     }
 
-    const user = await authenticationModels.findOne({ email });
+    const user = await userModel.findOne({ email });
     console.log("user", user);
-
     if (!user) {
       res.status(401).json({ messsage: "Burtgeltei hereglegch alga" });
       return;
     }
 
     console.log("jwt-secret", jwtSecret);
-    //http://localhost:3000/reset-password?id=kl12k32193
 
     const token = jwt.sign({ id: user._id }, jwtSecret!, { expiresIn: "1h" });
 

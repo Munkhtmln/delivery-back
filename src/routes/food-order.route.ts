@@ -1,5 +1,19 @@
-import express from "express";
+import { Router } from "express";
+import {
+  createFoodOrder,
+  deleteFoodOrder,
+  getFoodOrders,
+  getFoodOrdersByUser,
+  updateFoodOrder,
+} from "../controllers/food-order.controller";
 
-const foodOrderRoute = express.Router();
+const foodOrderRoute = Router();
 
-foodOrderRoute.post("/");
+foodOrderRoute
+  .post("/", createFoodOrder)
+  .get("/", getFoodOrders)
+  .get("/:userId", getFoodOrdersByUser)
+  .delete("/", deleteFoodOrder)
+  .patch("/:foodOrderId", updateFoodOrder);
+
+export { foodOrderRoute };

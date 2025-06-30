@@ -1,16 +1,17 @@
-import express from "express";
+import { Router } from "express";
 import {
   createFoodCategory,
-  deleteCategory,
-  getFoodCategory,
-  uptadeDelete,
-} from "../controller/food-category.controller";
+  deleteFoodCategory,
+  getFoodCategories,
+  updateFoodCategory,
+} from "../controllers/foodcategoty.controller";
 
-const categoryRoute = express.Router();
+const foodCategoryRoute = Router();
 
-categoryRoute.post("/", createFoodCategory);
-categoryRoute.get("/", getFoodCategory);
-categoryRoute.put("/:foodCategoryId", uptadeDelete);
-categoryRoute.delete("/:foodCategoryId", deleteCategory);
+foodCategoryRoute
+  .get("/", getFoodCategories)
+  .post("/", createFoodCategory)
+  .patch("/:foodCategoryId", updateFoodCategory)
+  .delete("/:foodCategoryId", deleteFoodCategory);
 
-export default categoryRoute;
+export { foodCategoryRoute };

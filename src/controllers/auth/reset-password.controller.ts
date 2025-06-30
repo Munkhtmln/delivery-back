@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import authenticationModels from "../models/authentication-models";
+import userModel from "../../models/user.model";
 import { hashSync } from "bcryptjs";
 
 export const resetPassword = async (req: Request, res: Response) => {
@@ -15,10 +15,9 @@ export const resetPassword = async (req: Request, res: Response) => {
 
     const decoded = jwt.verify(token, jwtSecret!) as JwtPayload;
     const id = decoded.id;
-
     const hashedPassword = hashSync(password, 10);
 
-    const user = await authenticationModels.findByIdAndUpdate(id, {
+    const user = await userModel.findByIdAndUpdate(id, {
       password: hashedPassword,
     });
     res

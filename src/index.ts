@@ -1,23 +1,26 @@
+import cors from "cors";
 import express from "express";
 import bodyParser from "body-parser";
-import cors from "cors";
 import { configDotenv } from "dotenv";
-import { connectedMongoDB } from "./database/db";
-import categoryRoute from "./routes/food-category.route";
-import foodRoute from "./routes/food-route";
-import authenticationRoute from "./routes/authentication-route";
+import { connectMongodb } from "./database/db";
+import { authRoute } from "./routes/auth.route";
+import { foodRoute } from "./routes/food.route";
+import { foodCategoryRoute } from "./routes/food-category.route";
+import { foodOrderRoute } from "./routes/food-order.route";
+import { userRoute } from "./routes/user.route";
 
 const app = express();
-configDotenv();
-
-connectedMongoDB();
-app.use(bodyParser.json());
 const port = process.env.PORT;
 app.use(cors());
-app.use("/food-category", categoryRoute);
-app.use("/foods", foodRoute);
-app.use("/Authentication", authenticationRoute);
+app.use(bodyParser.json());
+configDotenv();
+connectMongodb();
 
+app.use("/auth", authRoute);
+app.use("/food", foodRoute);
+app.use("/food-category", foodCategoryRoute);
+app.use("/food-order", foodOrderRoute);
+app.use("/user", userRoute);
 app.listen(port, () => {
-  console.log("server aslaa", port);
+  console.log(`Server is running on port ${port}`);
 });
